@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-
+import "@/assets/reset.css"
 
 // 导入插件集中管理
 import getVant from '@/plugins'

@@ -2,7 +2,7 @@
   <div class="swiper-top">
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img v-lazy="image" />
+        <img v-lazy="image.imageUrl" />
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -13,10 +13,7 @@ import { api_home_banner } from "@/apis/http";
 export default {
   data() {
     return {
-      images: [
-        "https://img01.yzcdn.cn/vant/apple-1.jpg",
-        "https://img01.yzcdn.cn/vant/apple-2.jpg",
-      ],
+      images: [],
     };
   },
   created() {
@@ -26,6 +23,7 @@ export default {
     async getBanner() {
       const result = await api_home_banner({ type: 2 });
       console.log(result);
+      this.images = result.data.banners
     },
   },
 };
@@ -33,17 +31,20 @@ export default {
 
 <style lang="less" scoped>
 .swiper-top {
+  width: 100%;
+  padding: 0.2rem;
   .van-swipe {
     width: 100%;
-    padding: 0.2rem;
     .van-swipe__track {
       .van-swipe-item {
         img {
           width: 100%;
           height: 3rem;
+          border-radius: 10px;
         }
       }
     }
+
     /deep/.van-swipe__indicator--active {
       background-color: #db8282;
     }
